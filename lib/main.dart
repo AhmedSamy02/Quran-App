@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(useMaterial3: true),
+      theme: ThemeData(fontFamily: 'Poppins'),
       initialRoute: kSurAndJuzScreen,
       routes: {
         kSplashScreen: (context) => const SplashScreen(),
