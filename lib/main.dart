@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/constants.dart';
+import 'package:quran_app/views/ayat_screen.dart';
 import 'package:quran_app/views/home_screen.dart';
 import 'package:quran_app/views/splash_screen.dart';
 import 'package:quran_app/views/surat_and_juz_screen.dart';
@@ -20,7 +21,8 @@ class MainApp extends StatelessWidget {
       routes: {
         kSplashScreen: (context) => const SplashScreen(),
         kHomeScreen: (context) => const HomeScreen(),
-        kSurAndJuzScreen: (context) => const SuratAndJuzScreen()
+        kSurAndJuzScreen: (context) => const SuratAndJuzScreen(),
+        kAyatScreen: (context) => const AyatScreen()
       },
       home: const SplashScreen(),
     );

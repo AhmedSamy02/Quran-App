@@ -6,6 +6,6 @@ class Api {
   static const juzes = 'juzs';
   static const allReaders = 'resources/recitations';
   static const getAitELKursi = 'quran/verses/uthmani?verse_key=2:255';
-  static const getSpecificAyahByKey =
-      'quran/verses/uthmani?verse_key=';
+  static const getSpecificAyahByKey = 'quran/verses/uthmani?verse_key=';
+  static const getTranslationOfSurah = 'quran/translations/131?chapter_number=';
 }

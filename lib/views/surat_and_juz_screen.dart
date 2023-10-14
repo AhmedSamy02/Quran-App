@@ -213,60 +213,63 @@ class SurListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: Row(
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset('assets/images/muslim.png'),
-                  Text(
-                    data.id.toString(),
-                    style: TextStyle(color: kSelectedTabColor, fontSize: 14),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, kAyatScreen,arguments: data),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Row(
+              children: [
+                Stack(
+                  alignment: Alignment.center,
                   children: [
+                    Image.asset('assets/images/muslim.png'),
                     Text(
-                      data.englishName,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: kSelectedTabColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      '${data.revelationPlace.toUpperCase()} - ${data.versesCount} VERSES',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white54,
-                        fontWeight: FontWeight.normal,
-                      ),
+                      data.id.toString(),
+                      style: TextStyle(color: kSelectedTabColor, fontSize: 14),
                     ),
                   ],
                 ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        data.englishName,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: kSelectedTabColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        '${data.revelationPlace.toUpperCase()} - ${data.versesCount} VERSES',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white54,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        Text(
-          data.arabicName,
-          style: TextStyle(
-              fontFamily: 'Amiri',
-              fontWeight: FontWeight.normal,
-              color: kSelectedTabColor,
-              fontSize: 20),
-        )
-      ],
+          Text(
+            data.arabicName,
+            style: TextStyle(
+                fontFamily: 'Amiri',
+                fontWeight: FontWeight.normal,
+                color: kSelectedTabColor,
+                fontSize: 20),
+          )
+        ],
+      ),
     );
   }
 }

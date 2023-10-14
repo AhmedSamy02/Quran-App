@@ -7,13 +7,15 @@ class Sura {
     required this.revelationPlace,
     required this.englishName,
     required this.arabicName,
+    required this.translatedName,
     required this.versesCount,
   });
-  
+
   int id;
   String revelationPlace;
   String englishName;
   String arabicName;
+  String translatedName;
   int versesCount;
 
   Map<String, dynamic> toMap() {
@@ -33,6 +35,7 @@ class Sura {
       englishName: map['name_simple'] as String,
       arabicName: map['name_arabic'] as String,
       versesCount: map['verses_count'] as int,
+      translatedName: map['translated_name']['name'],
     );
   }
 

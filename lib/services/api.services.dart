@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:quran_app/Apis/api.dart';
+import 'package:quran_app/models/ayah.dart';
 import 'package:quran_app/models/juz.dart';
 import 'package:quran_app/models/sura.dart';
 
@@ -9,6 +10,11 @@ class ApiServices {
   static final instance = ApiServices._();
   static Future<List<Sura>>? futureGetSurat;
   static Future<List<Juz>>? futureGetJuzs;
+  static Future<List<Ayah>>? futureGetAyatBySura;
+  void getAyatBySura(int id) {
+    futureGetAyatBySura = _fetchAyatBySura(id);
+  }
+
   void getJuzs() {
     futureGetJuzs = _fetchJuzs();
   }
@@ -38,11 +44,12 @@ class ApiServices {
       var data = response.data['juzs'];
       List<Juz> juzs = [];
       for (var element in data) {
-        var ayatMapping = element['verse_mapping'] ;
-        String firstAyahKey =
-            ayatMapping.keys.first + ':'+ayatMapping.values.first.split('-')[0];
+        var ayatMapping = element['verse_mapping'];
+        String firstAyahKey = ayatMapping.keys.first +
+            ':' +
+            ayatMapping.values.first.split('-')[0];
         String lastAyahKey =
-            ayatMapping.keys.last +':'+ ayatMapping.values.last.split('-')[1];
+            ayatMapping.keys.last + ':' + ayatMapping.values.last.split('-')[1];
         String firstAyah = await _fetchAyahByKey(firstAyahKey);
         String lastAyah = await _fetchAyahByKey(lastAyahKey);
         juzs.add(
@@ -64,5 +71,28 @@ class ApiServices {
     var response =
         await _dio.get(Api.baseLink + Api.getSpecificAyahByKey + key);
     return response.data['verses'][0]['text_uthmani'];
+  }
+
+  Future<List<Ayah>> _fetchAyatBySura(int suraId) async {
+    try {
+      var response1 =
+          await _dio.get('http://api.alquran.cloud/v1/surah/$suraId/ar.alafasy');
+      var response2 = await _dio
+          .get(Api.baseLink + Api.getTranslationOfSurah + suraId.toString());
+      var data = response1.data!['data']['ayahs'];
+      var translation = response2.data!['translations'];
+      List<Ayah> ayat = [];
+      int index = 0;
+      for (var element in data) {
+        ayat.add(
+          Ayah.fromMap(element, translation[index]['text']),
+        );
+        index++;
+      }
+      return ayat;
+    } catch (e) {
+      print(e.toString());
+      throw (e.toString());
+    }
   }
 }
