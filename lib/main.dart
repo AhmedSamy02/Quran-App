@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Poppins'),
-      initialRoute: kSurAndJuzScreen,
+      initialRoute: kHomeScreen,
       routes: {
         kSplashScreen: (context) => const SplashScreen(),
         kHomeScreen: (context) => const HomeScreen(),

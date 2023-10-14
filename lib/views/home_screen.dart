@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                               onTap: () {
-                                //TODO Implement
+                                //TODO Implement going to bookmark
                               },
                               child: WideCard()),
                         ],
@@ -138,26 +138,26 @@ class HomeGrid extends StatelessWidget {
   final List<String> arabicGridTitles = [
     'سورة',
     'جزء',
-    'حزب',
+    'سورة يس',
     'اّيت الكرسي',
   ];
   final List<String> englishGridTitles = [
     'Surah',
     'Juz',
-    'Hezb',
+    'Surah Yasin',
     'Ait Al-kursi',
   ];
   final List<Function> onPressedFunction = [
-    () {
-      //TODO: Implement the Surah screen navigation
+    (context) {
+      Navigator.pushNamed(context, kSurAndJuzScreen, arguments: 0);
     },
-    () {
-      //TODO: Implement the Juz screen navigation
+    (context) {
+      Navigator.pushNamed(context, kSurAndJuzScreen, arguments: 1);
     },
-    () {
-      //TODO: Implement the Hizb screen navigation
+    (context) {
+      //TODO: Implement the Suret Yasin screen navigation
     },
-    () {
+    (context) {
       //TODO: Implement the Ayit Kursi screen navigation
     },
   ];
@@ -166,16 +166,19 @@ class HomeGrid extends StatelessWidget {
     return GridView.builder(
       padding: const EdgeInsets.only(top: 28),
       itemCount: 4,
+      physics: const BouncingScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 50.0,
         mainAxisSpacing: 40.0,
       ),
       itemBuilder: (context, index) {
-        return HomeGridItem(
-          arabicGridTitle: arabicGridTitles[index],
-          englishGridTitle: englishGridTitles[index],
-          onPressed: onPressedFunction[index],
+        return GestureDetector(
+          onTap: () => onPressedFunction[index](context),
+          child: HomeGridItem(
+            arabicGridTitle: arabicGridTitles[index],
+            englishGridTitle: englishGridTitles[index],
+          ),
         );
       },
     );
@@ -187,12 +190,10 @@ class HomeGridItem extends StatelessWidget {
     super.key,
     required this.arabicGridTitle,
     required this.englishGridTitle,
-    required this.onPressed,
   });
 
   final String arabicGridTitle;
   final String englishGridTitle;
-  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -217,6 +218,7 @@ class HomeGridItem extends StatelessWidget {
                   arabicGridTitle,
                   style: const TextStyle(
                     fontFamily: 'Poppins',
+                    color: Colors.white,
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
                   ),
@@ -242,8 +244,8 @@ class HomeGridItem extends StatelessWidget {
                   height: 30,
                   child: const Icon(
                     Icons.arrow_forward_ios,
-                    color: Colors.white54,
-                    size: 20,
+                    color: Colors.white60,
+                    size: 16,
                   ),
                 ),
               ),
@@ -283,13 +285,17 @@ class WideCard extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.menu_book_sharp),
+                Icon(
+                  Icons.menu_book_sharp,
+                  color: Colors.white,
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
                     'Last Read',
                     style: TextStyle(
                       fontSize: 17,
+                      color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -305,16 +311,17 @@ class WideCard extends StatelessWidget {
                     Text(
                       'Al-Fatiah',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21,
-                          fontFamily: 'Poppins'),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        color: Colors.white,
+                      ),
                     ),
                     Text(
                       'Ayah No:1',
                       style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 16,
-                          fontFamily: 'Poppins'),
+                        color: Colors.white70,
+                        fontSize: 16,
+                      ),
                     )
                   ],
                 ),
@@ -343,13 +350,14 @@ class DrawerTop extends StatelessWidget {
           height: 250,
         ),
         const Padding(
-          padding: EdgeInsets.only(left: 16.0),
+          padding: EdgeInsets.only(left: 14.0),
           child: Column(
             children: [
               Text(
                 'Quran kareem',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
                 ),

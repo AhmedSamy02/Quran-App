@@ -9,6 +9,7 @@ class Sura {
     required this.arabicName,
     required this.versesCount,
   });
+  
   int id;
   String revelationPlace;
   String englishName;
